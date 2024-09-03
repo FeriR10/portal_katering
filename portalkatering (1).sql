@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 03, 2024 at 02:14 PM
+-- Generation Time: Sep 03, 2024 at 06:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,6 +44,33 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cekout`
+--
+
+CREATE TABLE `cekout` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `users_id` bigint(20) UNSIGNED NOT NULL,
+  `menu_id` bigint(20) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL,
+  `total_harga` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cekout`
+--
+
+INSERT INTO `cekout` (`id`, `users_id`, `menu_id`, `qty`, `total_harga`, `date`, `created_at`, `updated_at`) VALUES
+(1, 13, 6, 2, 10000000, '2024-09-06', '2024-09-03 08:22:05', '2024-09-03 08:22:05'),
+(2, 13, 6, 2, 10000000, '2024-09-07', '2024-09-03 08:23:01', '2024-09-03 08:23:01'),
+(3, 13, 6, 2, 10000000, '2024-09-06', '2024-09-03 08:25:43', '2024-09-03 08:25:43'),
+(4, 13, 5, 1, 60000, '2024-09-14', '2024-09-03 08:31:35', '2024-09-03 08:31:35');
 
 -- --------------------------------------------------------
 
@@ -144,7 +171,8 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`id`, `nama_menu`, `deskripsi`, `thumbnail`, `harga`, `created_at`, `updated_at`, `merchant_id`) VALUES
 (4, 'nasi', 'nasi putih', 'menu/xbDcbTvvFyPfTeT6i1c0mCEjAvwxzyf7y01VfiMV.jpg', '200000', '2024-09-03 02:12:03', '2024-09-03 02:12:03', 1),
 (5, 'ayam', 'ayam bakar', 'menu/XIv3p0LSVPDqFrwKK1grTg3jk3u5psnzepJpWL40.jpg', '60000', '2024-09-03 02:37:11', '2024-09-03 02:37:11', 1),
-(6, 'kue', 'kue kering', 'menu/kQGoYENL8XJSEEUtP4lbudCQQNUTxreDsRebVZ6H.png', '5000000', '2024-09-03 03:30:47', '2024-09-03 03:30:47', 2);
+(6, 'kue', 'kue kering', 'menu/kQGoYENL8XJSEEUtP4lbudCQQNUTxreDsRebVZ6H.png', '5000000', '2024-09-03 03:30:47', '2024-09-03 03:30:47', 2),
+(7, 'kopi', 'kpo cup', 'menu/PNhaIv67kKVaSYG8o3QCL6oAqPAK6bWGui4jT8yH.jpg', '10000', '2024-09-03 05:38:08', '2024-09-03 05:38:08', 1);
 
 -- --------------------------------------------------------
 
@@ -195,7 +223,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2024_09_03_055617_create_menu_table', 4),
 (12, '2024_09_03_082634_create_merchant_table', 5),
 (13, '2024_09_03_083530_add_merchant_id_to_menu_table', 6),
-(15, '2024_09_03_104335_create_keranjang_table', 7);
+(15, '2024_09_03_104335_create_keranjang_table', 7),
+(18, '2024_09_03_144639_create_cekout_table', 8);
 
 -- --------------------------------------------------------
 
@@ -275,7 +304,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('KXUfGqG4rJE6XGRS70tZ3gwGpvT4geoupPTnuyVD', 11, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSWJqWTRvdnZ2MjNObVhVaEJwSWloWnhnY3VCVExHdGtCdnNUa2RPdSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rZXJhbmphbmciO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxMTt9', 1725361128);
+('wcl3HV0jQEcOaljl7c8E2Z8ILwOGHuOrnUuyt1ad', 1, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZ3VzRFlzZ2NTUlJHTUZrSnMzZnlIR3Nmd2FmMXFxcjdZa1k5dE5YeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mcm9udG9mZmljZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1725379146);
 
 -- --------------------------------------------------------
 
@@ -310,7 +339,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ro
 (8, 'kiki', 'kiki@gmail.com', NULL, '$2y$12$YKMRUUkD.IDr45XF5AzskemXqMPfrQ3ZUtXWkSuZhbXT8cJd.gdaS', '2', NULL, '2024-09-03 03:15:24', '2024-09-03 03:15:24'),
 (9, 'ada', 'ada@gmail.com', NULL, '$2y$12$tbW7XKwU29gG0r17bS14U.zwkSWLoiQD4GZMVEQEwJjIuoh38Q0iK', '2', NULL, '2024-09-03 03:17:40', '2024-09-03 03:17:40'),
 (10, 'ini', 'ini@gmail.com', NULL, '$2y$12$gF8rpVBec70YwXRupyr39.8X2FZs6PJhD44cQLizJ9QtwrJInohqC', '2', NULL, '2024-09-03 03:22:43', '2024-09-03 03:22:43'),
-(11, 'cape', 'cape@gmail.com', NULL, '$2y$12$FE9b1C0hz661bS3hHUlwUOg5bmy/KVd7/UHQnqRQHXtDUjZpdP1.e', '2', NULL, '2024-09-03 03:29:11', '2024-09-03 03:29:11');
+(11, 'cape', 'cape@gmail.com', NULL, '$2y$12$FE9b1C0hz661bS3hHUlwUOg5bmy/KVd7/UHQnqRQHXtDUjZpdP1.e', '2', NULL, '2024-09-03 03:29:11', '2024-09-03 03:29:11'),
+(12, 'ff', 'ff@gmail.com', NULL, '$2y$12$shFPgMFn.2Lca7Vf1M5P9eAeak4ZOXO205YxPdT.uNeuh4beWyBse', '3', NULL, '2024-09-03 06:39:44', '2024-09-03 06:39:44'),
+(13, 'lol', 'lol@gmail.com', NULL, '$2y$12$RPXi8eeu67SxT//ZtkkE3O4pMOthLclSyVqSc4qp1siS05cTxLXN6', '3', NULL, '2024-09-03 06:44:09', '2024-09-03 06:44:09');
 
 --
 -- Indexes for dumped tables
@@ -327,6 +358,14 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `cekout`
+--
+ALTER TABLE `cekout`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cekout_users_id_foreign` (`users_id`),
+  ADD KEY `cekout_menu_id_foreign` (`menu_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -413,6 +452,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cekout`
+--
+ALTER TABLE `cekout`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -428,13 +473,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `merchant`
@@ -446,7 +491,7 @@ ALTER TABLE `merchant`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `profile`
@@ -464,11 +509,18 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cekout`
+--
+ALTER TABLE `cekout`
+  ADD CONSTRAINT `cekout_menu_id_foreign` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+  ADD CONSTRAINT `cekout_users_id_foreign` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `menu`
