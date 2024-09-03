@@ -13,5 +13,10 @@ class Menu extends Model
     {
         return $this->belongsTo(Merchant::class, 'merchant_id', 'id');
     }
+    public function keranjang()
+    {
+        return $this->hasOne(Keranjang::class, 'menu_id', 'id');
+
+    }
 
 }

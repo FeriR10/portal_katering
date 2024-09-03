@@ -12,8 +12,14 @@
                 </div>
                 <div class="col-sm-6">
                     <form action="/frontoffice" method="GET" class="form-inline float-sm-right">
-                        <input type="text" name="search" class="form-control mr-2" placeholder="Cari Merchant" value="{{ request('search') }}">
+                        <input type="text" name="search" class="form-control mr-2" placeholder="Cari Merchant"
+                            value="{{ request('search') }}">
                         <button type="submit" class="btn btn-primary">Cari</button>
+                        
+                                    <a href="/frontoffice" class="btn btn-warning ml-2">
+                                        <i class="fas fa-refresh"></i>
+                                    </a>
+                                   
                     </form>
                 </div>
             </div>
@@ -44,38 +50,46 @@
                 <form action="keranjang/store" method="POST" id="keranjangForm">
                     @csrf
                     <div class="row mt-3">
-    @foreach ($menus as $menu)
-    <div class="col-sm-4 mb-4"> <!-- Menyesuaikan lebar kolom untuk responsivitas -->
-        <div class="card h-100 shadow-sm"> <!-- Menambahkan shadow untuk tampilan yang lebih baik -->
-            <div class="card-header bg-primary text-white">
-                <p class="card-text mb-0" style="font-size: 14px;"><strong>Merchant:</strong> {{ $menu->merchant->nama_merchant }}</p>
-            </div>
-            <div class="card-body text-center">
-                <!-- Nama menu di atas gambar -->
-                
-                @if ($menu->thumbnail)
-                <img src="{{ asset('storage/' . $menu->thumbnail) }}" class="img-fluid mb-3"
-                    alt="{{ $menu->nama_menu }}" style="max-height: 180px;">
-                @else
-                <div class="text-center py-5 mb-3">
-                    <i class="fas fa-image fa-4x text-muted"></i>
-                    <p class="mt-2" style="font-size: 14px;">Gambar tidak tersedia</p>
-                </div>
-                @endif
-               
-                <p class="card-text mb-2" style="font-size: 20px;"><strong>{{ $menu->nama_menu }}</strong></p>
-                <p class="card-text mb-2" style="font-size: 14px;">{{ $menu->deskripsi }}</p>
-                <p class="card-text mb-3" style="font-size: 16px; font-weight: bold;">@currency($menu->harga)</p>
+                        @foreach ($menus as $menu)
+                        <div class="col-sm-4 mb-4">
+                            <!-- Menyesuaikan lebar kolom untuk responsivitas -->
+                            <div class="card h-100 shadow-sm">
+                                <!-- Menambahkan shadow untuk tampilan yang lebih baik -->
+                                <div class="card-header bg-primary text-white">
+                                    <p class="card-text mb-0" style="font-size: 14px;"><strong>Merchant:</strong>
+                                        {{ $menu->merchant->nama_merchant }}</p>
+                                        <p class="card-text mb-0" style="font-size: 14px;"><strong>Alamat: </strong>{{ $menu->merchant->lokasi }}</p>
+                                </div>
+                                <div class="card-body text-center">
+                                    <!-- Nama menu di atas gambar -->
 
-                <div class="form-check">
-                    <input type="checkbox" name="keranjang[{{ $menu->id }}]" class="form-check-input">
-                    <label class="form-check-label" style="font-size: 14px;">Tambah ke Keranjang</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-</div>
+                                    @if ($menu->thumbnail)
+                                    <img src="{{ asset('storage/' . $menu->thumbnail) }}" class="img-fluid mb-3"
+                                        alt="{{ $menu->nama_menu }}" style="max-height: 180px;">
+                                    @else
+                                    <div class="text-center py-5 mb-3">
+                                        <i class="fas fa-image fa-4x text-muted"></i>
+                                        <p class="mt-2" style="font-size: 14px;">Gambar tidak tersedia</p>
+                                    </div>
+                                    @endif
+
+                                    <p class="card-text mb-2" style="font-size: 20px;">
+                                        <strong>{{ $menu->nama_menu }}</strong></p>
+                                    <p class="card-text mb-2" style="font-size: 14px;">{{ $menu->deskripsi }}</p>
+                                    <p class="card-text mb-3" style="font-size: 16px; font-weight: bold;">
+                                        @currency($menu->harga)</p>
+
+                                    <div class="form-check">
+                                        <input type="checkbox" name="keranjang[{{ $menu->id }}]"
+                                            class="form-check-input">
+                                        <label class="form-check-label" style="font-size: 14px;">Tambah ke
+                                            Keranjang</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
 
                     <div class="text-center  fixed-btn">
                         <button type=" submit" class="btn btn-primary btn-lg ">Masukan Keranjang</button>
@@ -95,6 +109,7 @@
         right: 20px;
         z-index: 1000;
     }
+
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -109,5 +124,6 @@
             alert('Tidak ada barang yang dipilih');
         }
     });
+
 </script>
 @endsection

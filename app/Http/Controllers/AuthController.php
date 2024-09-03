@@ -43,8 +43,9 @@ class AuthController extends Controller
             // Redirect ke halaman /admin jika role adalah admin
             return redirect('/superadmin');
         }
+        
         // Redirect ke halaman yang diinginkan jika role bukan dealer
-        return redirect()->intended('/dashboard');
+        return redirect()->intended('/frontoffice');
     }
 
     // Flash pesan jika login gagal

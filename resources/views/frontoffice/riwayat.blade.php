@@ -43,21 +43,19 @@
                     <thead>
                         <tr class="highlight">
                             <th>Nama Pemesan</th>
-                            <th>Tanggal Pemesanan</th>
                             <th>Nama Menu</th>
-                            <th>Jumlah Barang</th>
+                            <th>Jumlah</th>
                             <th>Total Harga</th>
-                            <th>Tanggal Pengiriman</th>
+                            <th>Tanggal Pengantaran</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($cekout as $item)
                         <tr>
                             <td>{{@$item->users->name}}</td>
-                            <td>{{@$item->date}}</td>
                             <td>{{@$item->menu->nama_menu}}</td>
                             <td>{{@$item->qty}}</td>
-                            <td> @currency(@$item->total_harga)</td>
+                            <td>{{@$item->total_harga}}</td>
                             <td>{{@$item->date}}</td>
                          </tr>
                         @endforeach

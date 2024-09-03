@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Menu;
+use App\Models\Keranjang;
+use App\Models\Cekout;
+use App\Models\Merchant;
+use App\Models\Rating;
+use App\Models\Review;
+use App\Models\Komentar;
+use App\Models\KeranjangDetail;
 
 class BackofficeController extends Controller
 {
@@ -55,6 +63,7 @@ class BackofficeController extends Controller
     //detailorder   
     public function detailorder()
     {
-        return view('backoffice.detailorder.page');
+        $cekout = Cekout::get();
+        return view('backoffice.detailorder.page', compact('cekout'));
     }
 }

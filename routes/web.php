@@ -52,7 +52,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/frontoffice', [FrontofficeController::class, 'index']);
     Route::get('/keranjang', [FrontofficeController::class, 'keranjang']);
     Route::post('/keranjang/store', [FrontofficeController::class, 'store']);
-
+    Route::get('/keranjang/kurang/{id}', [FrontofficeController::class, 'kurang']);
+    Route::get('/keranjang/tambah/{id}', [FrontofficeController::class, 'tambah']);
+    Route::get('/keranjang/hapus/{id}', [FrontofficeController::class, 'destroy']);
+    Route::get('/keranjang/riwayat', [FrontofficeController::class, 'riwayat']);
+    Route::post('/cekout/store', [FrontofficeController::class, 'cekoutstore']);
 
 
 

@@ -8,7 +8,7 @@
     <section class="content-header">
 
     </section>
-  
+
     <!-- Main content -->
     <section class="content">
 
@@ -49,8 +49,13 @@
                             <td> {{ $keranjang->qty }}</td>
                             <td>@currency( $keranjang->qty * $keranjang->menu->harga )</td>
                             <td>
-                              
-                              
+                                <a href="/keranjang/kurang/{{ $keranjang->id }}" class="btn btn-danger">-</a>
+                                <a href="/keranjang/tambah/{{ $keranjang->id }}"
+                                    class="btn btn-primary @if($keranjang->qty == $keranjang->menu->qty) disabled @endif">+</a>
+                                <a href="/keranjang/hapus/{{ $keranjang->id }}" class="btn btn-danger"
+                                    onclick="return confirm('ANDA YAKIN AKAN MENGHAPUS ISI MENU INI?')">
+                                    <i class="fas fa-trash"></i></a>
+
                             </td>
                             @empty
 
@@ -62,7 +67,7 @@
 
                     <tfoot>
                         <tr>
-                            
+
                         </tr>
                         <td colspan="5" class="text-right font-weight-bold">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cekoout">
@@ -87,57 +92,53 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="cekoutstore" method="POST">
+                            <form action="cekout/store" method="POST">
                                 @csrf
                                 <table id="example1" class="table table-bordered table-striped"
                                     style="text-align: center">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Barang</th>
+                                            <th scope="col">Menu</th>
                                             <th>QTY</th>
                                             <th>Harga</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       
-                                    </tbody>
-                                    <table border="1">
-                                        <thead>
-                                            <tr>
-                                                <div class="form-group mb-3">
-                                                    <label>Vocher tersedia</label>
-                                                   
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div class="form-group mb-3">
-                                                    
-                                                </div>
-                                            </tr>
-                                            <tr>
-                                                <div class="form-group mb-3">
-                                                    <label for="">Keterangan</label>
-                                                    <textarea type="text" name="keterangan" class="form-control"
-                                                        value=""></textarea>
+                                        @forelse($cekout as $keranjang)
+                                        <tr>
+                                            <td>{{ $keranjang->menu->nama_menu }}</td>
+                                            <td>{{ $keranjang->qty }}</td>
+                                            <td>@currency( $keranjang->qty * $keranjang->menu->harga )</td>
 
-                                                </div> 
-                                            </tr>
-                                            <tr>
-                                                
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                        </tr>
+                                        @empty
+                                        <tr>
+                                            <td colspan="5">Tidak ada barang untuk cekout.</td>
+                                        </tr>
+                                        @endforelse
+
+
+                                    </tbody>
                                     <tfoot>
                                         <tr>
-
+                                            <div class="form-group">
+                                                <label for="date">Tanggal pengiriman</label>
+                                                <input type="date" id="date" name="date"
+                                                    class="form-control">
+                                            </div>
                                         </tr>
                                     </tfoot>
                                 </table>
 
 
                                 <div class="modal-footer">
-                                  
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @if($cekout->isEmpty())
+                                    <button type="submit" class="btn btn-primary" disabled>Bayar</button>
+                                    @else
+                                    <button type="submit" class="btn btn-primary">Bayar</button>
+                                    @endif
                                 </div>
                             </form>
                         </div>

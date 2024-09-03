@@ -29,6 +29,7 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
                 <li class="nav-item">
                     <a href="/backoffice" class="nav-link {{ request()->is('backoffice') ? 'active' : '' }}"
                         style="color: black;">
@@ -52,17 +53,31 @@
                         <p>Detail Order</p>
                     </a>
                 </li>
-
-
+                @endif
+                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 3)
                 <li class="nav-item">
-                    <a href="/frontoffice"
-                        class="nav-link {{ request()->is('/frontoffice') ? 'active' : '' }}"
+                    <a href="/frontoffice" class="nav-link {{ request()->is('/frontoffice') ? 'active' : '' }}"
                         style="color: black;">
-                        <i class="nav-icon fas fa-receipt"></i> <!-- Ikon untuk 'Detail Order' -->
+                        <i class="nav-icon fas fa-cash-register"></i> <!-- Ikon untuk 'Penjualan' -->
                         <p>Penjualan</p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/keranjang" class="nav-link {{ request()->is('/keranjang') ? 'active' : '' }}"
+                        style="color: black;">
+                        <i class="nav-icon fas fa-shopping-cart"></i> <!-- Ikon untuk 'Keranjang' -->
+                        <p>Keranjang</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/keranjang/riwayat"
+                        class="nav-link {{ request()->is('/keranjang/riwayat') ? 'active' : '' }}"
+                        style="color: black;">
+                        <i class="nav-icon fas fa-history"></i> <!-- Ikon untuk 'Riwayat' -->
+                        <p>Riwayat</p>
+                    </a>
+                </li>
+                @endif
             </ul>
         </nav>
 
