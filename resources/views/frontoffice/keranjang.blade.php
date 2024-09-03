@@ -121,7 +121,7 @@
                                                     <textarea type="text" name="keterangan" class="form-control"
                                                         value=""></textarea>
 
-                                                </div>
+                                                </div> 
                                             </tr>
                                             <tr>
                                                 
